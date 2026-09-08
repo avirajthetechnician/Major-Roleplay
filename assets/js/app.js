@@ -1,1 +1,20 @@
-document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('a[href="#"]').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));const search=document.querySelector('.search');if(search){const rows=[...document.querySelectorAll('.thread-row')];search.addEventListener('input',()=>{const q=search.value.toLowerCase();rows.forEach(row=>row.style.display=row.textContent.toLowerCase().includes(q)?'grid':'none')})}});
+function loadScript(src){return new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=src;s.onload=resolve;s.onerror=reject;document.head.appendChild(s)})}
+async function initForumAuth(){
+  document.querySelectorAll('.forum-account a,.account a').forEach(a=>{
+    const text=a.textContent.trim().toLowerCase();
+    if(text==='log in') a.href='auth.html';
+    if(text==='sign up') a.href='register.html';
+  });
+  try{
+    await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2');
+    await loadScript('assets/js/supabase-config.js');
+    await loadScript('assets/js/auth.js');
+    if(window.refreshAccount) await window.refreshAccount();
+  }catch(e){console.warn('Forum authentication is not configured yet:',e.message)}
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('a[href="#"]').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));
+  const search=document.querySelector('.search');
+  if(search){const rows=[...document.querySelectorAll('.thread-row')];search.addEventListener('input',()=>{const q=search.value.toLowerCase();rows.forEach(row=>row.style.display=row.textContent.toLowerCase().includes(q)?'grid':'none')})}
+  initForumAuth();
+});
