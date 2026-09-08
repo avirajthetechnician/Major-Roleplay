@@ -6,9 +6,9 @@ async function initForumAuth(){
     if(text==='sign up') a.href='register.html';
   });
   try{
-    await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2');
-    await loadScript('assets/js/supabase-config.js');
-    await loadScript('assets/js/auth.js');
+    if(!window.supabase?.createClient) await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2');
+    if(!window.MAJOR_SUPABASE_URL) await loadScript('assets/js/supabase-config.js');
+    if(!window.refreshAccount) await loadScript('assets/js/auth.js');
     if(window.refreshAccount) await window.refreshAccount();
   }catch(e){console.warn('Forum authentication is not configured yet:',e.message)}
 }
