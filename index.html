@@ -7,31 +7,30 @@
   <link rel="icon" type="image/svg+xml" href="assets/img/major-logo.svg">
   <link rel="stylesheet" href="assets/css/style.css">
   <style>
-    .brand{min-width:205px;padding:0 20px 0 0}
-    .brand-logo{display:block;width:142px;height:60px;object-fit:contain;object-position:center}
-    .home-about{max-width:1080px;margin:0 auto;padding:42px 15px 70px}
-    .home-hero{background:linear-gradient(120deg,#172b25 0%,#285246 52%,#183f66 100%);color:#fff;border:1px solid #263e37;border-radius:4px;padding:42px 44px;margin-bottom:18px;box-shadow:var(--shadow)}
-    .home-hero .eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:#b9cbc4;margin-bottom:10px;font-weight:800}
-    .home-hero h1{font-size:32px;margin:0 0 10px}
-    .home-hero p{font-size:13px;color:#e0e8e5;margin:0;line-height:1.7;max-width:680px}
-    .home-section{background:#fff;border:1px solid var(--line);border-radius:4px;margin-bottom:14px;box-shadow:var(--shadow);overflow:hidden}
-    .home-section-inner{padding:24px 26px}
-    .home-section h2{font-size:17px;margin:0 0 10px;color:#343b40}
-    .home-section p{font-size:12px;line-height:1.85;color:#697278;margin:0 0 13px}
-    .home-section p:last-child{margin-bottom:0}
-    .home-section strong{color:#343b40}
-    .discord-card{display:flex;align-items:center;justify-content:space-between;gap:20px;background:linear-gradient(120deg,#f8fafb,#fff);border:1px solid var(--line);border-radius:4px;padding:22px 26px;margin-top:18px}
-    .discord-card h2{margin:0 0 6px;font-size:16px}
-    .discord-card p{margin:0;color:#7d858b;font-size:10px;line-height:1.6}
-    .discord-button{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;background:#2563eb;color:#fff;border:1px solid #2563eb;border-radius:3px;padding:11px 18px;font-size:10px;font-weight:800}
-    .discord-button:hover{filter:brightness(.95)}
-    .home-ending{text-align:center;padding:26px 15px 0}
-    .home-ending h2{font-size:18px;margin:0 0 8px}
-    .home-ending p{font-size:11px;color:#899197;margin:0}
-    @media(max-width:650px){
-      .home-about{padding:25px 10px 50px}.brand{min-width:auto;padding-right:6px;border:0}.brand-logo{width:105px;height:58px}
-      .home-hero{padding:30px 24px}.home-hero h1{font-size:27px}.home-section-inner{padding:20px}.discord-card{display:block;padding:20px}.discord-button{margin-top:16px;width:100%}
-    }
+    :root{--home-blue:#2563eb;--home-blue2:#3b82f6;--home-dark:#07111f;--home-ink:#17202c;--home-muted:#6f7b88;--home-line:#e4e9ef;--home-soft:#f6f8fb}
+    body{background:#f0f3f7}
+    .topbar{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(255,255,255,.94);box-shadow:0 1px 0 rgba(12,24,40,.06)}
+    .brand-logo{transition:transform .25s ease}.brand:hover .brand-logo{transform:translateY(-1px) scale(1.02)}
+    .home-about{max-width:1180px;margin:0 auto;padding:28px 18px 72px}
+    .home-hero{position:relative;isolation:isolate;overflow:hidden;min-height:390px;display:flex;align-items:center;background:linear-gradient(120deg,#07111f 0%,#0b2340 48%,#123b70 100%);border:1px solid #173a61;border-radius:10px;padding:58px 64px;margin-bottom:18px;box-shadow:0 18px 45px rgba(7,17,31,.16)}
+    .home-hero:before,.home-hero:after{content:"";position:absolute;z-index:-1;border-radius:50%;pointer-events:none}
+    .home-hero:before{width:420px;height:420px;right:-100px;top:-150px;background:radial-gradient(circle,rgba(59,130,246,.35),transparent 68%);filter:blur(4px)}
+    .home-hero:after{width:300px;height:300px;left:35%;bottom:-220px;background:rgba(37,99,235,.24);filter:blur(55px)}
+    .hero-grid{position:absolute;inset:0;opacity:.08;background-image:linear-gradient(rgba(255,255,255,.7) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.7) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to right,transparent,black,transparent)}
+    .hero-content{max-width:730px;position:relative}
+    .home-hero .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:#93c5fd;margin-bottom:14px;font-weight:900}.home-hero .eyebrow:before{content:"";width:22px;height:2px;background:#3b82f6;border-radius:5px}
+    .home-hero h1{font-size:clamp(34px,5vw,56px);line-height:1.03;letter-spacing:-.035em;margin:0 0 17px;color:#fff;max-width:760px}
+    .home-hero h1 span{color:#60a5fa}
+    .home-hero p{font-size:14px;color:#cbd8e8;margin:0;line-height:1.8;max-width:650px}.home-hero p strong{color:#fff}
+    .hero-actions{display:flex;gap:10px;margin-top:25px;flex-wrap:wrap}.hero-primary,.hero-secondary{display:inline-flex;align-items:center;justify-content:center;padding:12px 19px;border-radius:5px;font-size:10px;font-weight:900;transition:.2s ease}.hero-primary{background:#2563eb;color:#fff;border:1px solid #3b82f6;box-shadow:0 8px 22px rgba(37,99,235,.28)}.hero-secondary{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.2)}.hero-primary:hover{transform:translateY(-2px);filter:brightness(1.07)}.hero-secondary:hover{background:rgba(255,255,255,.11);transform:translateY(-2px)}
+    .home-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:-2px 0 18px}.home-stat{background:#fff;border:1px solid var(--home-line);border-radius:7px;padding:18px 20px;box-shadow:0 5px 18px rgba(20,35,50,.045);position:relative;overflow:hidden}.home-stat:after{content:"";position:absolute;left:0;top:0;width:3px;height:100%;background:#2563eb}.home-stat strong{display:block;font-size:21px;color:#17202c;letter-spacing:-.02em}.home-stat span{display:block;margin-top:4px;font-size:8px;color:#89939e;text-transform:uppercase;letter-spacing:.1em;font-weight:800}
+    .home-section{background:#fff;border:1px solid var(--home-line);border-radius:7px;margin-bottom:14px;box-shadow:0 5px 18px rgba(20,35,50,.045);overflow:hidden;transition:transform .2s ease,box-shadow .2s ease}.home-section:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(20,35,50,.07)}
+    .home-section-inner{padding:27px 30px}.home-section h2{font-size:17px;margin:0 0 10px;color:#26313d;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}.home-section h2:before{content:"";width:4px;height:18px;border-radius:3px;background:#2563eb;display:inline-block}.home-section p{font-size:12px;line-height:1.9;color:#6f7b88;margin:0 0 12px}.home-section p:last-child{margin-bottom:0}.home-section strong{color:#273441}
+    .home-feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}.home-feature{background:#fff;border:1px solid var(--home-line);border-radius:7px;padding:23px 22px;box-shadow:0 5px 18px rgba(20,35,50,.045)}.feature-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:7px;background:#eff6ff;color:#2563eb;font-size:15px;font-weight:900;margin-bottom:14px}.home-feature h3{font-size:13px;margin:0 0 7px;color:#293541}.home-feature p{font-size:10px;line-height:1.7;color:#7d8791;margin:0}
+    .discord-card{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:20px;background:linear-gradient(115deg,#0a1728,#102d50);border:1px solid #183c66;border-radius:8px;padding:27px 30px;margin-top:18px;box-shadow:0 12px 30px rgba(7,17,31,.12)}.discord-card:after{content:"";position:absolute;width:250px;height:250px;right:-80px;top:-130px;background:radial-gradient(circle,rgba(59,130,246,.3),transparent 70%)}.discord-card>div{position:relative;z-index:1}.discord-card h2{color:#fff;margin:0 0 6px;font-size:17px}.discord-card p{margin:0;color:#aebfd2;font-size:10px;line-height:1.65}.discord-button{position:relative;z-index:2;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;background:#2563eb;color:#fff;border:1px solid #3b82f6;border-radius:4px;padding:11px 18px;font-size:10px;font-weight:900;transition:.2s}.discord-button:hover{transform:translateY(-2px);filter:brightness(1.08);box-shadow:0 8px 18px rgba(37,99,235,.25)}
+    .home-ending{text-align:center;padding:34px 15px 0}.home-ending h2{font-size:19px;margin:0 0 7px;color:#273441}.home-ending p{font-size:10px;color:#89939e;margin:0}.home-ending p strong{color:#2563eb}
+    @media(max-width:800px){.home-feature-grid{grid-template-columns:1fr}.home-hero{padding:45px 38px}.home-stats{grid-template-columns:1fr}.home-stat{padding:15px 18px}}
+    @media(max-width:650px){.home-about{padding:18px 10px 50px}.home-hero{min-height:360px;padding:34px 24px;border-radius:7px}.home-hero h1{font-size:35px}.home-hero p{font-size:12px}.home-section-inner{padding:22px}.discord-card{display:block;padding:22px}.discord-button{margin-top:16px;width:100%}.home-feature{padding:20px}}
   </style>
 </head>
 <body>
@@ -40,12 +39,38 @@
     <nav><a class="active" href="index.html">Home</a><a href="forum.html">Forum</a><a href="servers.html">Servers</a></nav>
     <div class="account" data-auth-state><a href="auth.html">Log in</a><a class="signup" href="register.html">Sign up</a></div>
   </header>
+
   <main class="home-about">
-    <section class="home-hero"><div class="eyebrow">About Major Roleplay</div><h1>Welcome to Major Roleplay — where your story begins.</h1><p>Major Roleplay is built around one simple idea: <strong>you should be able to create your own story.</strong></p></section>
+    <section class="home-hero">
+      <div class="hero-grid"></div>
+      <div class="hero-content">
+        <div class="eyebrow">Major Roleplay</div>
+        <h1>Your city. Your story. <span>Your rules.</span></h1>
+        <p>Step into a living roleplay experience where every decision matters. Build your character, meet your people, make your mark, and create stories worth remembering.</p>
+        <div class="hero-actions"><a class="hero-primary" href="servers.html">Explore Servers</a><a class="hero-secondary" href="forum.html">Visit Forum</a></div>
+      </div>
+    </section>
+
+    <section class="home-stats" aria-label="Major Roleplay highlights">
+      <div class="home-stat"><strong>24/7</strong><span>Living roleplay world</span></div>
+      <div class="home-stat"><strong>Community</strong><span>Players building stories together</span></div>
+      <div class="home-stat"><strong>Unlimited</strong><span>Ways to play your character</span></div>
+    </section>
+
+    <section class="home-feature-grid">
+      <article class="home-feature"><div class="feature-icon">01</div><h3>Shape your story</h3><p>Your character can become anything. Make choices, form connections, and let your reputation grow naturally.</p></article>
+      <article class="home-feature"><div class="feature-icon">02</div><h3>Play together</h3><p>Meet other players and create unpredictable moments through immersive, player-driven roleplay.</p></article>
+      <article class="home-feature"><div class="feature-icon">03</div><h3>Build your legacy</h3><p>Start a business, join an organization, climb the ranks, or make a name that the city remembers.</p></article>
+    </section>
+
     <section class="home-section"><div class="home-section-inner"><h2>A World Built Around You</h2><p>Major Roleplay isn't just about playing a character — it's about becoming one.</p><p>Every decision you make can shape your experience. Meet new people, build friendships, make enemies, start businesses, join organizations, rise through the ranks, or create a reputation that follows you throughout the city.</p><p>The world keeps moving, and <strong>your actions have consequences.</strong></p></div></section>
+
     <section class="home-section"><div class="home-section-inner"><h2>Real Roleplay. Real Stories.</h2><p>We believe the best roleplay comes from players creating stories together.</p><p>Our community is built around immersive interactions, meaningful character development, and an environment where every player can contribute to the world around them.</p><p>From high-speed pursuits and organized crime to everyday conversations and unexpected encounters, you never know what your next moment in Major Roleplay will look like.</p></div></section>
+
     <section class="home-section"><div class="home-section-inner"><h2>Built for the Community</h2><p>Major Roleplay is more than a server. It's a community of players, creators, staff, and roleplayers working together to build something bigger.</p><p>We're constantly improving the experience, introducing new features, expanding the world, and listening to the people who make Major Roleplay what it is — <strong>the players.</strong></p></div></section>
+
     <section class="home-section"><div class="home-section-inner"><h2>Your Story. Your Choice.</h2><p>There is no single way to play Major Roleplay.</p><p><strong>Become someone. Build something. Make a name for yourself.</strong></p><p>The city is waiting.</p></div></section>
+
     <div class="discord-card"><div><h2>Join the Major Roleplay Discord</h2><p>Connect with the community, stay up to date, and be part of what's happening in Major Roleplay.</p></div><a class="discord-button" href="https://discord.gg/fstDXsMEkT" target="_blank" rel="noopener noreferrer">Join Discord</a></div>
     <div class="home-ending"><h2>Welcome to Major Roleplay.</h2><p><strong>Your story starts here.</strong></p></div>
   </main>
