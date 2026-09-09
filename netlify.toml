@@ -1,2 +1,3 @@
+# Netlify clean/pretty URLs for static HTML pages
 [build.processing.html]
   pretty_urls = true
