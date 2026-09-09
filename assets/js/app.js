@@ -1,13 +1,12 @@
 function loadScript(src){return new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=src;s.onload=resolve;s.onerror=reject;document.head.appendChild(s)})}
 function normalizeForumUrl(){
   const url=new URL(location.href);
-  if(url.pathname.endsWith('/forum-category.html')&&url.searchParams.has('id')&&!url.searchParams.has('category_id')){
-    url.searchParams.set('category_id',url.searchParams.get('id'));url.searchParams.delete('id');history.replaceState(null,'',url.pathname+url.search);
-  }
-  if(url.pathname.endsWith('/post-thread.html')&&url.searchParams.has('id')&&!url.searchParams.has('category_id')){
-    url.searchParams.set('category_id',url.searchParams.get('id'));url.searchParams.delete('id');history.replaceState(null,'',url.pathname+url.search);
+  if((url.pathname.endsWith('/forum-category.html')||url.pathname.endsWith('/post-thread.html'))&&url.searchParams.has('id')){
+    const target=url.pathname.endsWith('/forum-category.html')?'category_id':'category_id';
+    if(!url.searchParams.has(target)){url.searchParams.set(target,url.searchParams.get('id'));url.searchParams.delete('id');history.replaceState(null,'',url.pathname+url.search)}
   }
 }
+normalizeForumUrl();
 async function initForumAuth(){
   document.querySelectorAll('.forum-account a,.account a').forEach(a=>{
     const text=a.textContent.trim().toLowerCase();
